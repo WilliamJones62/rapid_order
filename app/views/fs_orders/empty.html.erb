@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+<h2>There are no outstanding orders at this time. Click the refresh button below to check for new orders.</h2>
+<br>
+<%= link_to 'Refresh', fs_orders_find_path, class: "btn btn-primary" %>
+<%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-primary" %>

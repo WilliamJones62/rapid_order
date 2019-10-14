@@ -1,0 +1,71 @@
+<%= form_with(model: fs_order, local: true) do |form| %>
+  <% if fs_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(fs_order.errors.count, "error") %> prohibited this fs_order from being saved:</h2>
+
+      <ul>
+      <% fs_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Ship to</th>
+        <th>Ship Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @fs_order.customer %></td>
+        <td><%= @fs_order.shipto %></td>
+        <td><%= display_date(@fs_order.date_required) %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @fs_order.notes %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-bordered" >
+    <thead>
+      <tr>
+        <th> UOM </th>
+        <th> Part </th>
+        <th> Description </th>
+        <th> Quantity </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @fs_order.fs_order_parts.each do |c| %>
+      <tr>
+        <td> <%= c.uom %> </td>
+        <td> <%= c.partcode %> </td>
+        <td> <%= c.partdesc %> </td>
+        <td> <%= c.qty %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div>
+    <%= form.label :order_num, "Order Number" %>
+    <%= form.text_field :order_num, {id: "fs_order_order_num", :oninput=> ("setQuit()")} %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

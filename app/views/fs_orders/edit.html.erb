@@ -1,0 +1,14 @@
+<% if @count == 1 %>
+  <h2>Editing Order.  This is the last order in the queue.</h2>
+<% else %>
+  <h2>Editing Order.  There are <%= @count %> orders in the queue.</h2>
+<% end %>
+<br>
+<p id="notice"><%= notice %></p>
+<br>
+<%= render 'form', fs_order: @fs_order %>
+<br>
+<% if current_user.email == 'admin' %>
+  <%= link_to 'Orders', fs_orders_path(id: @fs_order.id), class: "btn btn-primary" %>
+<% end %>
+<%= link_to 'Quit', fs_orders_quit_path(id: @fs_order.id), id: "quit", class: "btn btn-primary" %>

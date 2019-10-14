@@ -1,0 +1,14 @@
+<span class="primary-logo">
+</span>
+<span id="navbar">
+</span>
+<h1 class="title">Rapid Orders
+</h1>
+<% if user_signed_in? %>
+  <span>Signed in as <%= current_user.email %></span>
+<% else %>
+  <span>No user currently signed in</span>
+<% end %>
+<%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+<br>
