@@ -14,15 +14,21 @@
     <thead>
       <tr>
         <th>Customer</th>
-        <th>Ship to</th>
+        <th>Ship To</th>
         <th>Ship Date</th>
+        <th>Purchase Order</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><%= @fs_order.customer %></td>
         <td><%= @fs_order.shipto %></td>
-        <td><%= display_date(@fs_order.date_required) %></td>
+        <% if Time.current.tomorrow.strftime('%Y-%m-%d') == fs_order.date_required.strftime('%Y-%m-%d') %>
+          <td><%= display_date(@fs_order.date_required) %></td>
+        <% else %>
+          <td class="blinking"><%= display_date(@fs_order.date_required) %></td>
+        <% end %>
+        <td><%= @fs_order.po_number %></td>
       </tr>
     </tbody>
   </table>
@@ -43,19 +49,19 @@
   <table class="table table-bordered" >
     <thead>
       <tr>
+        <th> Quantity </th>
         <th> UOM </th>
         <th> Part </th>
         <th> Description </th>
-        <th> Quantity </th>
       </tr>
     </thead>
     <tbody>
       <% @fs_order.fs_order_parts.each do |c| %>
       <tr>
+        <td> <%= c.qty %> </td>
         <td> <%= c.uom %> </td>
         <td> <%= c.partcode %> </td>
         <td> <%= c.partdesc %> </td>
-        <td> <%= c.qty %> </td>
       </tr>
       <% end %>
     </tbody>
@@ -63,9 +69,9 @@
 
   <div>
     <%= form.label :order_num, "Order Number" %>
-    <%= form.text_field :order_num, {id: "fs_order_order_num", :oninput=> ("setQuit()")} %>
+    <%= form.text_field :order_num, {id: "fs_order_order_num", :oninput=> ("setQuit()"), :size=>"7", :maxlength => "7"} %>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Submit", :id => 'Scomit', :style => "display: none;" %>
   </div>
 <% end %>

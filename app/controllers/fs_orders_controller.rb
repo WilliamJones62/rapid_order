@@ -3,16 +3,14 @@ class FsOrdersController < ApplicationController
 
   def find
     # get first available order.
-    active_order = FsOrder.where(status: "ACTIVE").where(in_process: [nil, false]).take(1)
-    if active_order.length == 1
+    active_order = FsOrder.where(status: "ACTIVE").where(in_process: [nil, false]).first
+    if active_order
       # we have found an active order that is not being processed by another DP
-      active_order.each do |a|
-        fs_order = FsOrder.lock(true).find(a.id)
-        # set the in_process flag to true to stop other DPs trying to enter this record
-        fs_order.in_process = true
-        fs_order.save!
-        redirect_to edit_fs_order_path(fs_order)
-      end
+      fs_order = FsOrder.lock(true).find(active_order.id)
+      # set the in_process flag to true to stop other DPs trying to enter this record
+      fs_order.in_process = true
+      fs_order.save!
+      redirect_to edit_fs_order_path(fs_order)
     else
       # there are no orders to process.
       redirect_to fs_orders_empty_path
