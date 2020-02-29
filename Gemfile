@@ -62,4 +62,4 @@ gem 'dotenv'
 gem 'bootstrap-sass'
 
 gem 'whenever', require: false
-gem 'rake', '12.3.2'
+gem 'rake', '12.3.3'
