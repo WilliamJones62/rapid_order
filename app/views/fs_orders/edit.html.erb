@@ -11,4 +11,5 @@
 <% if current_user.email == 'admin' %>
   <%= link_to 'Orders', fs_orders_path(id: @fs_order.id), class: "btn btn-primary" %>
 <% end %>
+<%= link_to 'Reject', fs_orders_reject_path(id: @fs_order.id), id: "reject", class: "btn btn-primary", :style => "display: none;" %>
 <%= link_to 'Quit', fs_orders_quit_path(id: @fs_order.id), id: "quit", class: "btn btn-primary" %>

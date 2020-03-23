@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cust_code: MyString
+  shipto_code: MyString
+  route_code: MyString
+  cutoff_time: 2020-02-24 08:26:51
+
+two:
+  cust_code: MyString
+  shipto_code: MyString
+  route_code: MyString
+  cutoff_time: 2020-02-24 08:26:51

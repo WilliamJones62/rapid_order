@@ -1,25 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<table id="listtab"  class="stripe" class="mytable" class="display" cellspacing="0" >
+<% if @fs_orders.length == 0 %>
+  <h2 id="message">There are no outstanding orders</h2>
+<% elsif @fs_orders.length == 1 %>
+  <h2 id="message">There is one outstanding order</h2>
+<% else %>
+  <h2 id="message">There are <%= @fs_orders.length.to_s %> outstanding orders</h2>
+<% end %>
+
+<% if @fs_orders.length == 0 %>
+  <table id="customers" class="stripe" class="mytable" class="display" cellspacing="0" style="display: none" >
+<% else %>
+  <table id="customers" class="stripe" class="mytable" class="display" cellspacing="0" style="display: inline" >
+<% end %>
   <thead>
     <tr>
       <th>Rep</th>
       <th>Customer</th>
       <th>Ship to</th>
-      <th>Date</th>
+      <th>Time entered</th>
+      <th>Date required</th>
+      <th>Cut off time</th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="orderbody">
     <% @fs_orders.each do |fs_order| %>
       <tr>
-        <td><%= fs_order.rep %></td>
+        <td><%= display_name(fs_order.rep) %></td>
         <td><%= fs_order.customer %></td>
         <td><%= fs_order.shipto %></td>
+        <td><%= display_time(fs_order.created_at) %></td>
         <td><%= display_date(fs_order.date_required) %></td>
+        <td><%= fs_order.cut_off %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<br>
 <%= link_to 'Next', fs_orders_find_path, class: "btn btn-primary" %>
 <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-primary" %>

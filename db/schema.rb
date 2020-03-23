@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191007134919) do
+ActiveRecord::Schema.define(version: 20200224135428) do
+
+  create_table "employees", force: :cascade do |t|
+    t.string "Badge_"
+    t.string "Firstname"
+    t.string "Lastname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "fs_order_parts", force: :cascade do |t|
     t.integer "fs_order_id"
@@ -21,6 +29,7 @@ ActiveRecord::Schema.define(version: 20191007134919) do
     t.boolean "new_part"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "back_order"
   end
 
   create_table "fs_orders", force: :cascade do |t|
@@ -40,6 +49,18 @@ ActiveRecord::Schema.define(version: 20191007134919) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "dp"
+    t.string "rep_name"
+    t.string "reject_reason"
+    t.string "cut_off"
+  end
+
+  create_table "lateorderscustomercos", force: :cascade do |t|
+    t.string "cust_code"
+    t.string "shipto_code"
+    t.string "route_code"
+    t.datetime "cutoff_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

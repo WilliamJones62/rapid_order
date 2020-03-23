@@ -1,0 +1,2 @@
+class Lateorderscustomerco < ApplicationRecord
+end

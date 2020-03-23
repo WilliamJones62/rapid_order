@@ -3,7 +3,6 @@
 <br>
 <%= link_to 'Refresh', fs_orders_find_path, id: "refresh", :style=> 'display:none', class: "btn btn-primary" %>
 <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
-
-<script type="text/javascript"><!--
-setInterval( getOrders, 60000 );
-//--></script>
+<% if current_user.email == 'admin' %>
+  <%= link_to 'Orders', fs_orders_path, class: "btn btn-primary" %>
+<% end %>
