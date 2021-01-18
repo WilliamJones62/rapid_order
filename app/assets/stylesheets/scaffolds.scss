@@ -55,7 +55,8 @@ th, td {
 }
 
 .blinking{
-    animation:blinkingText 1.0s infinite;
+    animation:blinkingText 2.0s infinite;
+    background-color: #f18973;
 }
 
 @keyframes blinkingText{

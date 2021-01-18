@@ -18,18 +18,20 @@
         <th>Ship To</th>
         <th>Ship Date</th>
         <th>Purchase Order</th>
+        <th>Second Run</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><%= @fs_order.customer %></td>
         <td><%= @fs_order.shipto %></td>
-        <% if Time.current.tomorrow.strftime('%Y-%m-%d') == fs_order.date_required.strftime('%Y-%m-%d') %>
-          <td><%= display_date(@fs_order.date_required) %></td>
+        <% if fs_order.next_schedueled_delivery == fs_order.date_required %>
+          <td style="background-color:DodgerBlue;"><%= display_date(@fs_order.date_required) %></td>
         <% else %>
-          <td class="blinking"><%= display_date(@fs_order.date_required) %></td>
+          <td style="background-color: #f18973;"><%= display_date(@fs_order.date_required) %></td>
         <% end %>
-        <td><%= @fs_order.po_number %></td>
+        <td style="background-color:DodgerBlue;"><%= @fs_order.po_number %></td>
+        <td><%= human_boolean(@fs_order.second_run) %></td>
       </tr>
     </tbody>
   </table>
@@ -42,7 +44,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @fs_order.notes %></td>
+        <td style="background-color:DodgerBlue;"><%= @fs_order.notes %></td>
       </tr>
     </tbody>
   </table>
@@ -63,7 +65,7 @@
         <td><%= p.text_field :partcode, readonly: true, :style => "width:8em" %></td>
         <td><%= p.text_field :partdesc, readonly: true, :style => "width:30em" %></td>
         <td><%= p.text_field :uom, readonly: true, :style => "width:2.5em" %></td>
-        <td><%= p.number_field :qty, readonly: true, :style => "width:2.5em" %></td>
+        <td><%= p.number_field :qty, readonly: true %></td>
         <td><%= p.check_box :back_order %></td>
       </tr>
       <% end %>
